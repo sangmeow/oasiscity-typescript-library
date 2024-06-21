@@ -1,3 +1,3 @@
-const isNumber = (val: unknown): boolean => typeof val === 'number' || false
-
-export { isNumber }
+export function sum(a: number, b: number): number {
+	return a + b;
+}

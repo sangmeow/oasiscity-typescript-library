@@ -1,10 +1,7 @@
-import * as LIB from './index'
+import { sum } from "./index";
 
-describe('IsNumber', () => {
-  test('Should return true for (1)', () => {
-    expect(LIB.isNumber(1)).toBe(true)
-  })
-  test('Should return false for ("1")', () => {
-    expect(LIB.isNumber('1')).toBe(false)
-  })
-})
+describe("sum module", () => {
+	test("adds 1 + 2 to equal 3", () => {
+		expect(sum(1, 2)).toBe(3);
+	});
+});
