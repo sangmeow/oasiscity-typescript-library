@@ -80,7 +80,7 @@ const validateISODateFormat = (dateString: string): boolean => {
 /**
  * Converts 14-digit numeric string to datetime format
  * @param dateString
- * e.g. input "19700101232221" -> "1970-01-01-23:22:21"
+ * e.g. input "19700101232221" -> "1970-01-01T23:22:21"
  */
 const convertToISODatetime = (dateString: string): string => {
 	const YYYY: string = dateString.substring(0, 4);

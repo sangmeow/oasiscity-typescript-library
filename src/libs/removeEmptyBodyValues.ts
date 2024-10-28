@@ -20,3 +20,18 @@ export const removeEmptyBodyValues = (obj: JSONObject | null): JSONObject => {
 
 	return result;
 };
+
+export const removeEmptyNestedBodyValues = (obj: JSONObject | null): JSONObject => {
+	const output: JSONObject = {};
+	for (const key in obj) {
+		const value = obj[key];
+		if (isNotEmpty(value)) {
+			if (typeof value === "object" && !Array.isArray(value)) {
+				output[key] = removeEmptyNestedBodyValues(value);
+			} else {
+				output[key] = value;
+			}
+		}
+	}
+	return output;
+};
