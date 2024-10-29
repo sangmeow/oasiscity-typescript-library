@@ -21,3 +21,15 @@ export const isNotEmpty = (value: dataTypes): boolean => {
 	if (typeof value === "object" && Object.keys(value).length === 0) return false;
 	return true;
 };
+
+export const isNumericOnly = (value: string): boolean => {
+	return /^\d+$/.test(value);
+};
+
+export const isAlphabeticOnly = (value: string): boolean => {
+	return /^[a-zA-Z]+$/.test(value);
+};
+
+export const isNumAlphabeticOnly = (value: string): boolean => {
+	return /^[a-zA-Z0-9]+$/.test(value);
+};
