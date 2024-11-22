@@ -17,17 +17,15 @@ var __copyProps = (to, from, except, desc) => {
 };
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-// src/libs/validator.ts
-var validator_exports = {};
-__export(validator_exports, {
-  isAlphabeticOnly: () => isAlphabeticOnly,
-  isNumAlphabeticOnly: () => isNumAlphabeticOnly,
-  isNumericOnly: () => isNumericOnly,
-  isObjectEmpty: () => isObjectEmpty
-});
-module.exports = __toCommonJS(validator_exports);
-
 // src/libs/isEmpty.ts
+var isEmpty_exports = {};
+__export(isEmpty_exports, {
+  isEmpty: () => isEmpty,
+  isNotEmpty: () => isNotEmpty,
+  setOneIfEmpty: () => setOneIfEmpty,
+  setZeroIfEmpty: () => setZeroIfEmpty
+});
+module.exports = __toCommonJS(isEmpty_exports);
 var isEmpty = (value) => {
   if (value === null || value === void 0) return true;
   if (typeof value === "string" && value.trim() === "") return true;
@@ -35,25 +33,31 @@ var isEmpty = (value) => {
   if (typeof value === "object" && Object.keys(value).length === 0) return true;
   return false;
 };
-
-// src/libs/validator.ts
-var isObjectEmpty = (data, key) => {
-  if (!(data == null ? void 0 : data.hasOwnProperty(key))) return true;
-  return isEmpty(data[key]);
+var isNotEmpty = (value) => {
+  if (value === null || value === void 0) return false;
+  if (typeof value === "string" && value.trim() === "") return false;
+  if (Array.isArray(value) && value.length === 0) return false;
+  if (typeof value === "object" && Object.keys(value).length === 0) return false;
+  return true;
 };
-var isNumericOnly = (value) => {
-  return /^\d+$/.test(value);
+var setZeroIfEmpty = (value) => {
+  if (value === null || value === void 0) return 0;
+  if (typeof value === "string" && value.trim() === "") return 0;
+  if (Array.isArray(value) && value.length === 0) return 0;
+  if (typeof value === "object" && Object.keys(value).length === 0) return 0;
+  return value;
 };
-var isAlphabeticOnly = (value) => {
-  return /^[a-zA-Z]+$/.test(value);
-};
-var isNumAlphabeticOnly = (value) => {
-  return /^[a-zA-Z0-9]+$/.test(value);
+var setOneIfEmpty = (value) => {
+  if (value === null || value === void 0) return 1;
+  if (typeof value === "string" && value.trim() === "") return 1;
+  if (Array.isArray(value) && value.length === 0) return 1;
+  if (typeof value === "object" && Object.keys(value).length === 0) return 1;
+  return value;
 };
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  isAlphabeticOnly,
-  isNumAlphabeticOnly,
-  isNumericOnly,
-  isObjectEmpty
+  isEmpty,
+  isNotEmpty,
+  setOneIfEmpty,
+  setZeroIfEmpty
 });

@@ -97,6 +97,7 @@ const convertToISODatetime = (dateString: string): string => {
  * @returns string
  * e.g. 2024-09-22 03:29:58 in Asia/Seoul
  */
+/*
 export const setDatetimeUTCZero = (dateString: string = new Date().toISOString(), isStartDate = true): string | undefined => {
 	const DATE_START_END = {
 		start: { year: 1970, month: 1, day: 1, hour: 0, minute: 0, second: 0, millisecond: 0, datetime: "19700101000000" },
@@ -113,3 +114,4 @@ export const setDatetimeUTCZero = (dateString: string = new Date().toISOString()
 	// Set UTC 0 and create date
 	return now.toISOString().split(".")[0].replace(/T/gi, " ").replace(/Z/gi, ""); // isISOFormat
 };
+*/

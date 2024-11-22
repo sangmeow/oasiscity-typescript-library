@@ -13,6 +13,8 @@
     "noImplicitAny": false /* Enable error reporting for expressions and declarations with an implied 'any' type. */,
     "skipLibCheck": true /* Skip type checking all .d.ts files. */
   },
-  "include": ["src/**/*.ts"] /* Add the path to your TypeScript file or directory here */,
-  "exclude": ["node_modules", "**/*.test.ts", "nodeenv-18.20.0"]
+  "include": [
+    "src/**/*.ts"
+  ] /* Add the path to your TypeScript file or directory here */,
+  "exclude": [".vscode", "node_modules", "**/*.test.ts", "nodeenv-18.20.0"]
 }

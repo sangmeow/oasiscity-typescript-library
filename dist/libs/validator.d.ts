@@ -1,5 +1,8 @@
-import { Json } from '../interface/Json.interface';
-export declare const isObjectEmpty: (data: Json, key: string) => boolean;
-export declare const isEmpty: (value: any) => boolean;
-export declare const isNotEmpty: (value: any) => boolean;
-//# sourceMappingURL=validator.d.ts.map
+import { dataTypes } from '../interface/Json.interface.js';
+
+declare const isObjectEmpty: (data: dataTypes, key: string) => boolean;
+declare const isNumericOnly: (value: string) => boolean;
+declare const isAlphabeticOnly: (value: string) => boolean;
+declare const isNumAlphabeticOnly: (value: string) => boolean;
+
+export { isAlphabeticOnly, isNumAlphabeticOnly, isNumericOnly, isObjectEmpty };
