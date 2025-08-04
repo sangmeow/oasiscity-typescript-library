@@ -11,3 +11,4 @@ export * from "./libs/removeEmptyBodyValues";
 export * from "./libs/removeEmptyQueryValues";
 export * from "./libs/utcDatetime";
 export * from "./libs/validator";
+export * from "./libs/xss";
