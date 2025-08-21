@@ -1,6 +1,6 @@
 {
-  "name": "oasiscity-typescript-library",
-  "description": "oasiscity-typescript-library",
+  "name": "@types/oasiscity-typescript-library",
+  "description": "@types/oasiscity-typescript-library",
   "version": "1.0.0",
   "author": "sickdog.oasiscity",
   "main": "./dist/index.js",

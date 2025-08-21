@@ -28,11 +28,11 @@ const deepCopy = (target, visited) => {
     }
     // Handle primitive types (string, number, boolean, symbol, bigint)
     const targetType = typeof target;
-    if (targetType !== 'object' && targetType !== 'function') {
+    if (targetType !== "object" && targetType !== "function") {
         return target;
     }
     // Handle functions - return as is (functions are typically not deep copied)
-    if (targetType === 'function') {
+    if (targetType === "function") {
         return target;
     }
     // Type assertion for object types
@@ -134,7 +134,6 @@ const deepCopy = (target, visited) => {
     // Copy own enumerable properties
     for (const key in target) {
         if (Object.prototype.hasOwnProperty.call(target, key)) {
-            ;
             copy[key] = (0, exports.deepCopy)(target[key], visitedMap);
         }
     }
@@ -142,7 +141,7 @@ const deepCopy = (target, visited) => {
     const propertyDescriptors = Object.getOwnPropertyDescriptors(target);
     for (const key of Object.keys(propertyDescriptors)) {
         const descriptor = propertyDescriptors[key];
-        if (!descriptor.enumerable && Object.prototype.hasOwnProperty.call(descriptor, 'value')) {
+        if (!descriptor.enumerable && Object.prototype.hasOwnProperty.call(descriptor, "value")) {
             Object.defineProperty(copy, key, Object.assign(Object.assign({}, descriptor), { value: (0, exports.deepCopy)(descriptor.value, visitedMap) }));
         }
     }
@@ -150,7 +149,7 @@ const deepCopy = (target, visited) => {
     const symbolKeys = Object.getOwnPropertySymbols(target);
     for (const symbolKey of symbolKeys) {
         const descriptor = Object.getOwnPropertyDescriptor(target, symbolKey);
-        if (descriptor && Object.prototype.hasOwnProperty.call(descriptor, 'value')) {
+        if (descriptor && Object.prototype.hasOwnProperty.call(descriptor, "value")) {
             Object.defineProperty(copy, symbolKey, Object.assign(Object.assign({}, descriptor), { value: (0, exports.deepCopy)(descriptor.value, visitedMap) }));
         }
     }
@@ -168,18 +167,18 @@ const isDeepCopyable = (value) => {
     if (value === null || value === undefined)
         return true;
     const valueType = typeof value;
-    if (valueType !== 'object' && valueType !== 'function')
+    if (valueType !== "object" && valueType !== "function")
         return true;
     // Functions are generally not deep copyable due to closures
-    if (valueType === 'function')
+    if (valueType === "function")
         return false;
     // Check for DOM elements (in browser environment)
-    if (typeof Element !== 'undefined' && value instanceof Element)
+    if (typeof Element !== "undefined" && value instanceof Element)
         return false;
-    if (typeof Node !== 'undefined' && value instanceof Node)
+    if (typeof Node !== "undefined" && value instanceof Node)
         return false;
     // Check for Window object (in browser environment)
-    if (typeof Window !== 'undefined' && value instanceof Window)
+    if (typeof Window !== "undefined" && value instanceof Window)
         return false;
     return true;
 };
@@ -193,11 +192,11 @@ exports.isDeepCopyable = isDeepCopyable;
  * @throws Error if the target contains non-copyable elements
  */
 const deepCopyStrict = (target) => {
-    const checkCopyable = (value, path = 'root') => {
+    const checkCopyable = (value, path = "root") => {
         if (!(0, exports.isDeepCopyable)(value)) {
             throw new Error(`Non-copyable value found at path: ${path}`);
         }
-        if (value && typeof value === 'object') {
+        if (value && typeof value === "object") {
             if (Array.isArray(value)) {
                 for (let index = 0; index < value.length; index++) {
                     checkCopyable(value[index], `${path}[${index}]`);
