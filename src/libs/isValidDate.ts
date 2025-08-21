@@ -15,7 +15,6 @@ import { isValidDateTime } from './isValidDateTime'
  * isValidDateTime(''); // false (empty string)
  * ```
  */
-
-export function isValidDate(input?: string | number | Date): boolean {
+export const isValidDate = (input?: string | number | Date): boolean => {
   return isValidDateTime(input)
 }
