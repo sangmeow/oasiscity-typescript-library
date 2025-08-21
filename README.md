@@ -44,3 +44,26 @@ export default defineConfig({
   clean: true,
 });
 ```
+
+### Biome
+
+```bash
+npm run biome
+```
+
+### Jest test
+
+```json
+...
+"scripts": {
+    "test": "jest",
+    "build": "tsc -p .",
+    "build:npm": "tsup"
+  },
+...
+```
+
+```bash
+npm test
+npm test isValidDateTime.test.ts
+```
