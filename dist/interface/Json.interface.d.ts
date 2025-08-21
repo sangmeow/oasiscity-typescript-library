@@ -1,7 +1,8 @@
-export type dataTypes = string | number | boolean | null | undefined | JSONObject | JSONArray;
-export interface JSONObject {
+type dataTypes = string | number | boolean | null | undefined | JSONObject | JSONArray;
+interface JSONObject {
     [x: string]: dataTypes | JSONObject | JSONArray;
 }
-export interface JSONArray extends Array<dataTypes> {
+interface JSONArray extends Array<dataTypes> {
 }
-//# sourceMappingURL=Json.interface.d.ts.map
+
+export type { JSONArray, JSONObject, dataTypes };

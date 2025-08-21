@@ -16,5 +16,5 @@
   "include": [
     "src/**/*.ts"
   ] /* Add the path to your TypeScript file or directory here */,
-  "exclude": [".vscode", "node_modules", "**/*.test.ts", "nodeenv-18.20.0"]
+  "exclude": [".vscode", "node_modules", "**/*.test.ts", "dist", "src/_libs"]
 }

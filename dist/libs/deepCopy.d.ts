@@ -16,7 +16,7 @@
  *
  * @see Based on ts-deepcopy https://github.com/ykdr2017/ts-deepcopy
  */
-export declare const deepCopy: <T>(target: T, visited?: WeakMap<object, unknown>) => T;
+declare const deepCopy: <T>(target: T, visited?: WeakMap<object, unknown>) => T;
 /**
  * Type guard to check if a value can be safely deep copied.
  * Some objects like DOM elements, functions with closures, etc. may not copy correctly.
@@ -24,7 +24,7 @@ export declare const deepCopy: <T>(target: T, visited?: WeakMap<object, unknown>
  * @param value - The value to check
  * @returns True if the value can be safely deep copied
  */
-export declare const isDeepCopyable: (value: unknown) => boolean;
+declare const isDeepCopyable: (value: unknown) => boolean;
 /**
  * Deep copy with validation - throws an error if the target contains non-copyable elements.
  *
@@ -33,5 +33,6 @@ export declare const isDeepCopyable: (value: unknown) => boolean;
  * @returns A deep copy of the target value
  * @throws Error if the target contains non-copyable elements
  */
-export declare const deepCopyStrict: <T>(target: T) => T;
-//# sourceMappingURL=deepCopy.d.ts.map
+declare const deepCopyStrict: <T>(target: T) => T;
+
+export { deepCopy, deepCopyStrict, isDeepCopyable };
