@@ -1,3 +1,6 @@
 node_modules
 
+packege-lock.json
+yarn.lock
+
 src/_libs

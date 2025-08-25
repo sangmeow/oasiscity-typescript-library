@@ -1,11 +1,14 @@
 {
-  "name": "@types/oasiscity-typescript-library",
-  "description": "@types/oasiscity-typescript-library",
+  "name": "@oasiscity/oasiscity-typescript-library",
+  "description": "@oasiscity/oasiscity-typescript-library",
   "version": "1.0.0",
   "author": "sickdog.oasiscity",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "test": "jest",
     "build": "tsc -p .",
