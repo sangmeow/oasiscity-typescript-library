@@ -3,6 +3,5 @@
  * @param input - Date input value of string, number, or Date type
  * @returns Date object
  */
-declare const parseDateTime: (input: string | number | Date) => Date;
-
-export { parseDateTime };
+export declare const parseDateTime: (input: string | number | Date) => Date;
+//# sourceMappingURL=parseDateTime.d.ts.map

@@ -14,6 +14,5 @@
  * isValidDateTime(''); // false (empty string)
  * ```
  */
-declare const isValidDateTime: (input?: string | number | Date) => boolean;
-
-export { isValidDateTime };
+export declare const isValidDateTime: (input?: string | number | Date) => boolean;
+//# sourceMappingURL=isValidDateTime.d.ts.map

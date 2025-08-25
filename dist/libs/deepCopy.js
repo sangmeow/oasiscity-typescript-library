@@ -1,216 +1,232 @@
 "use strict";
-var __defProp = Object.defineProperty;
-var __defProps = Object.defineProperties;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __propIsEnum = Object.prototype.propertyIsEnumerable;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __spreadValues = (a, b) => {
-  for (var prop in b || (b = {}))
-    if (__hasOwnProp.call(b, prop))
-      __defNormalProp(a, prop, b[prop]);
-  if (__getOwnPropSymbols)
-    for (var prop of __getOwnPropSymbols(b)) {
-      if (__propIsEnum.call(b, prop))
-        __defNormalProp(a, prop, b[prop]);
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.deepCopyStrict = exports.isDeepCopyable = exports.deepCopy = void 0;
+/**
+ * Deep copy function for TypeScript with enhanced performance and type safety.
+ * Handles circular references and supports a wide range of built-in objects.
+ *
+ * @template T - The type of the target value to be copied
+ * @param target - The target value to be deep copied
+ * @param visited - Internal parameter for circular reference detection (do not use manually)
+ * @returns A deep copy of the target value
+ *
+ * @example
+ * ```typescript
+ * const original = { a: 1, b: { c: 2 }, d: [3, 4] };
+ * const copy = deepCopy(original);
+ * copy.b.c = 5; // original.b.c remains 2
+ * ```
+ *
+ * @see Based on ts-deepcopy https://github.com/ykdr2017/ts-deepcopy
+ */
+const deepCopy = (target, visited) => {
+    // Initialize visited map for circular reference detection
+    const visitedMap = visited !== null && visited !== void 0 ? visited : new WeakMap();
+    // Handle null and undefined
+    if (target === null || target === undefined) {
+        return target;
     }
-  return a;
-};
-var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// src/libs/deepCopy.ts
-var deepCopy_exports = {};
-__export(deepCopy_exports, {
-  deepCopy: () => deepCopy,
-  deepCopyStrict: () => deepCopyStrict,
-  isDeepCopyable: () => isDeepCopyable
-});
-module.exports = __toCommonJS(deepCopy_exports);
-var deepCopy = (target, visited) => {
-  const visitedMap = visited != null ? visited : /* @__PURE__ */ new WeakMap();
-  if (target === null || target === void 0) {
-    return target;
-  }
-  const targetType = typeof target;
-  if (targetType !== "object" && targetType !== "function") {
-    return target;
-  }
-  if (targetType === "function") {
-    return target;
-  }
-  const targetObj = target;
-  if (visitedMap.has(targetObj)) {
-    return visitedMap.get(targetObj);
-  }
-  if (target instanceof Date) {
-    const dateCopy = new Date(target.getTime());
-    visitedMap.set(targetObj, dateCopy);
-    return dateCopy;
-  }
-  if (target instanceof RegExp) {
-    const regexCopy = new RegExp(target.source, target.flags);
-    visitedMap.set(targetObj, regexCopy);
-    return regexCopy;
-  }
-  if (target instanceof Error) {
-    const ErrorConstructor = target.constructor;
-    const errorCopy = new ErrorConstructor(target.message);
-    const errorInstance = errorCopy;
-    if (target.stack) {
-      errorInstance.stack = target.stack;
+    // Handle primitive types (string, number, boolean, symbol, bigint)
+    const targetType = typeof target;
+    if (targetType !== 'object' && targetType !== 'function') {
+        return target;
     }
-    if (target.name) {
-      errorInstance.name = target.name;
+    // Handle functions - return as is (functions are typically not deep copied)
+    if (targetType === 'function') {
+        return target;
     }
-    visitedMap.set(targetObj, errorCopy);
-    return errorCopy;
-  }
-  if (target instanceof ArrayBuffer) {
-    const bufferCopy = target.slice(0);
-    visitedMap.set(targetObj, bufferCopy);
-    return bufferCopy;
-  }
-  if (ArrayBuffer.isView(target) && !(target instanceof DataView)) {
-    const TypedArrayConstructor = target.constructor;
-    const typedArrayTarget = target;
-    const bufferCopy = typedArrayTarget.buffer.slice(0);
-    const typedArrayCopy = new TypedArrayConstructor(bufferCopy);
-    visitedMap.set(targetObj, typedArrayCopy);
-    return typedArrayCopy;
-  }
-  if (target instanceof DataView) {
-    const bufferCopy = target.buffer.slice(0);
-    const dataViewCopy = new DataView(bufferCopy, target.byteOffset, target.byteLength);
-    visitedMap.set(targetObj, dataViewCopy);
-    return dataViewCopy;
-  }
-  if (Array.isArray(target)) {
-    const arrayCopy = [];
-    visitedMap.set(targetObj, arrayCopy);
-    for (let i = 0; i < target.length; i++) {
-      arrayCopy[i] = deepCopy(target[i], visitedMap);
+    // Type assertion for object types
+    const targetObj = target;
+    // Check for circular references
+    if (visitedMap.has(targetObj)) {
+        return visitedMap.get(targetObj);
     }
-    return arrayCopy;
-  }
-  if (target instanceof Map) {
-    const mapCopy = /* @__PURE__ */ new Map();
-    visitedMap.set(targetObj, mapCopy);
-    for (const [key, value] of target.entries()) {
-      mapCopy.set(deepCopy(key, visitedMap), deepCopy(value, visitedMap));
+    // Handle Date objects
+    if (target instanceof Date) {
+        const dateCopy = new Date(target.getTime());
+        visitedMap.set(targetObj, dateCopy);
+        return dateCopy;
     }
-    return mapCopy;
-  }
-  if (target instanceof Set) {
-    const setCopy = /* @__PURE__ */ new Set();
-    visitedMap.set(targetObj, setCopy);
-    for (const value of target.values()) {
-      setCopy.add(deepCopy(value, visitedMap));
+    // Handle RegExp objects
+    if (target instanceof RegExp) {
+        const regexCopy = new RegExp(target.source, target.flags);
+        visitedMap.set(targetObj, regexCopy);
+        return regexCopy;
     }
-    return setCopy;
-  }
-  if (target instanceof WeakMap) {
-    const weakMapCopy = /* @__PURE__ */ new WeakMap();
-    visitedMap.set(targetObj, weakMapCopy);
-    return weakMapCopy;
-  }
-  if (target instanceof WeakSet) {
-    const weakSetCopy = /* @__PURE__ */ new WeakSet();
-    visitedMap.set(targetObj, weakSetCopy);
-    return weakSetCopy;
-  }
-  const copy = Object.create(Object.getPrototypeOf(targetObj));
-  visitedMap.set(targetObj, copy);
-  for (const key in target) {
-    if (Object.prototype.hasOwnProperty.call(target, key)) {
-      ;
-      copy[key] = deepCopy(
-        target[key],
-        visitedMap
-      );
-    }
-  }
-  const propertyDescriptors = Object.getOwnPropertyDescriptors(target);
-  for (const key of Object.keys(propertyDescriptors)) {
-    const descriptor = propertyDescriptors[key];
-    if (!descriptor.enumerable && Object.prototype.hasOwnProperty.call(descriptor, "value")) {
-      Object.defineProperty(copy, key, __spreadProps(__spreadValues({}, descriptor), {
-        value: deepCopy(descriptor.value, visitedMap)
-      }));
-    }
-  }
-  const symbolKeys = Object.getOwnPropertySymbols(target);
-  for (const symbolKey of symbolKeys) {
-    const descriptor = Object.getOwnPropertyDescriptor(target, symbolKey);
-    if (descriptor && Object.prototype.hasOwnProperty.call(descriptor, "value")) {
-      Object.defineProperty(copy, symbolKey, __spreadProps(__spreadValues({}, descriptor), {
-        value: deepCopy(descriptor.value, visitedMap)
-      }));
-    }
-  }
-  return copy;
-};
-var isDeepCopyable = (value) => {
-  if (value === null || value === void 0) return true;
-  const valueType = typeof value;
-  if (valueType !== "object" && valueType !== "function") return true;
-  if (valueType === "function") return false;
-  if (typeof Element !== "undefined" && value instanceof Element) return false;
-  if (typeof Node !== "undefined" && value instanceof Node) return false;
-  if (typeof Window !== "undefined" && value instanceof Window) return false;
-  return true;
-};
-var deepCopyStrict = (target) => {
-  const checkCopyable = (value, path = "root") => {
-    if (!isDeepCopyable(value)) {
-      throw new Error(`Non-copyable value found at path: ${path}`);
-    }
-    if (value && typeof value === "object") {
-      if (Array.isArray(value)) {
-        for (let index = 0; index < value.length; index++) {
-          checkCopyable(value[index], `${path}[${index}]`);
+    // Handle Error objects
+    if (target instanceof Error) {
+        const ErrorConstructor = target.constructor;
+        const errorCopy = new ErrorConstructor(target.message);
+        const errorInstance = errorCopy;
+        if (target.stack) {
+            errorInstance.stack = target.stack;
         }
-      } else if (value instanceof Map) {
-        let index = 0;
-        for (const [key, val] of value.entries()) {
-          checkCopyable(key, `${path}.keys[${index}]`);
-          checkCopyable(val, `${path}.values[${index}]`);
-          index++;
+        if (target.name) {
+            errorInstance.name = target.name;
         }
-      } else if (value instanceof Set) {
-        let index = 0;
-        for (const val of value.values()) {
-          checkCopyable(val, `${path}.values[${index}]`);
-          index++;
-        }
-      } else {
-        for (const [key, val] of Object.entries(value)) {
-          checkCopyable(val, `${path}.${key}`);
-        }
-      }
+        visitedMap.set(targetObj, errorCopy);
+        return errorCopy;
     }
-  };
-  checkCopyable(target);
-  return deepCopy(target);
+    // Handle ArrayBuffer
+    if (target instanceof ArrayBuffer) {
+        const bufferCopy = target.slice(0);
+        visitedMap.set(targetObj, bufferCopy);
+        return bufferCopy;
+    }
+    // Handle typed arrays
+    if (ArrayBuffer.isView(target) && !(target instanceof DataView)) {
+        const TypedArrayConstructor = target.constructor;
+        const typedArrayTarget = target;
+        const bufferCopy = typedArrayTarget.buffer.slice(0);
+        const typedArrayCopy = new TypedArrayConstructor(bufferCopy);
+        visitedMap.set(targetObj, typedArrayCopy);
+        return typedArrayCopy;
+    }
+    // Handle DataView
+    if (target instanceof DataView) {
+        const bufferCopy = target.buffer.slice(0);
+        const dataViewCopy = new DataView(bufferCopy, target.byteOffset, target.byteLength);
+        visitedMap.set(targetObj, dataViewCopy);
+        return dataViewCopy;
+    }
+    // Handle Arrays
+    if (Array.isArray(target)) {
+        const arrayCopy = [];
+        visitedMap.set(targetObj, arrayCopy);
+        for (let i = 0; i < target.length; i++) {
+            arrayCopy[i] = (0, exports.deepCopy)(target[i], visitedMap);
+        }
+        return arrayCopy;
+    }
+    // Handle Map objects
+    if (target instanceof Map) {
+        const mapCopy = new Map();
+        visitedMap.set(targetObj, mapCopy);
+        for (const [key, value] of target.entries()) {
+            mapCopy.set((0, exports.deepCopy)(key, visitedMap), (0, exports.deepCopy)(value, visitedMap));
+        }
+        return mapCopy;
+    }
+    // Handle Set objects
+    if (target instanceof Set) {
+        const setCopy = new Set();
+        visitedMap.set(targetObj, setCopy);
+        for (const value of target.values()) {
+            setCopy.add((0, exports.deepCopy)(value, visitedMap));
+        }
+        return setCopy;
+    }
+    // Handle WeakMap (cannot be deeply copied, return new empty WeakMap)
+    if (target instanceof WeakMap) {
+        const weakMapCopy = new WeakMap();
+        visitedMap.set(targetObj, weakMapCopy);
+        return weakMapCopy;
+    }
+    // Handle WeakSet (cannot be deeply copied, return new empty WeakSet)
+    if (target instanceof WeakSet) {
+        const weakSetCopy = new WeakSet();
+        visitedMap.set(targetObj, weakSetCopy);
+        return weakSetCopy;
+    }
+    // Handle plain objects and class instances
+    const copy = Object.create(Object.getPrototypeOf(targetObj));
+    visitedMap.set(targetObj, copy);
+    // Copy own enumerable properties
+    for (const key in target) {
+        if (Object.prototype.hasOwnProperty.call(target, key)) {
+            ;
+            copy[key] = (0, exports.deepCopy)(target[key], visitedMap);
+        }
+    }
+    // Copy non-enumerable own properties
+    const propertyDescriptors = Object.getOwnPropertyDescriptors(target);
+    for (const key of Object.keys(propertyDescriptors)) {
+        const descriptor = propertyDescriptors[key];
+        if (!descriptor.enumerable && Object.prototype.hasOwnProperty.call(descriptor, 'value')) {
+            Object.defineProperty(copy, key, Object.assign(Object.assign({}, descriptor), { value: (0, exports.deepCopy)(descriptor.value, visitedMap) }));
+        }
+    }
+    // Copy symbol properties
+    const symbolKeys = Object.getOwnPropertySymbols(target);
+    for (const symbolKey of symbolKeys) {
+        const descriptor = Object.getOwnPropertyDescriptor(target, symbolKey);
+        if (descriptor && Object.prototype.hasOwnProperty.call(descriptor, 'value')) {
+            Object.defineProperty(copy, symbolKey, Object.assign(Object.assign({}, descriptor), { value: (0, exports.deepCopy)(descriptor.value, visitedMap) }));
+        }
+    }
+    return copy;
 };
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {
-  deepCopy,
-  deepCopyStrict,
-  isDeepCopyable
-});
+exports.deepCopy = deepCopy;
+/**
+ * Type guard to check if a value can be safely deep copied.
+ * Some objects like DOM elements, functions with closures, etc. may not copy correctly.
+ *
+ * @param value - The value to check
+ * @returns True if the value can be safely deep copied
+ */
+const isDeepCopyable = (value) => {
+    if (value === null || value === undefined)
+        return true;
+    const valueType = typeof value;
+    if (valueType !== 'object' && valueType !== 'function')
+        return true;
+    // Functions are generally not deep copyable due to closures
+    if (valueType === 'function')
+        return false;
+    // Check for DOM elements (in browser environment)
+    if (typeof Element !== 'undefined' && value instanceof Element)
+        return false;
+    if (typeof Node !== 'undefined' && value instanceof Node)
+        return false;
+    // Check for Window object (in browser environment)
+    if (typeof Window !== 'undefined' && value instanceof Window)
+        return false;
+    return true;
+};
+exports.isDeepCopyable = isDeepCopyable;
+/**
+ * Deep copy with validation - throws an error if the target contains non-copyable elements.
+ *
+ * @template T - The type of the target value
+ * @param target - The target value to be deep copied
+ * @returns A deep copy of the target value
+ * @throws Error if the target contains non-copyable elements
+ */
+const deepCopyStrict = (target) => {
+    const checkCopyable = (value, path = 'root') => {
+        if (!(0, exports.isDeepCopyable)(value)) {
+            throw new Error(`Non-copyable value found at path: ${path}`);
+        }
+        if (value && typeof value === 'object') {
+            if (Array.isArray(value)) {
+                for (let index = 0; index < value.length; index++) {
+                    checkCopyable(value[index], `${path}[${index}]`);
+                }
+            }
+            else if (value instanceof Map) {
+                let index = 0;
+                for (const [key, val] of value.entries()) {
+                    checkCopyable(key, `${path}.keys[${index}]`);
+                    checkCopyable(val, `${path}.values[${index}]`);
+                    index++;
+                }
+            }
+            else if (value instanceof Set) {
+                let index = 0;
+                for (const val of value.values()) {
+                    checkCopyable(val, `${path}.values[${index}]`);
+                    index++;
+                }
+            }
+            else {
+                for (const [key, val] of Object.entries(value)) {
+                    checkCopyable(val, `${path}.${key}`);
+                }
+            }
+        }
+    };
+    checkCopyable(target);
+    return (0, exports.deepCopy)(target);
+};
+exports.deepCopyStrict = deepCopyStrict;
+//# sourceMappingURL=deepCopy.js.map
