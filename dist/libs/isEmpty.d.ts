@@ -12,7 +12,7 @@
  * isEmpty(0) // false
  * isEmpty(false) // false
  */
-export declare const isEmpty: <T>(value: T) => value is Extract<T, null | undefined>;
+declare const isEmpty: <T>(value: T) => value is Extract<T, null | undefined>;
 /**
  * Checks if a value is not empty (opposite of isEmpty)
  * @param value - Value to check
@@ -24,7 +24,7 @@ export declare const isEmpty: <T>(value: T) => value is Extract<T, null | undefi
  * isNotEmpty([1, 2, 3]) // true
  * isNotEmpty({a: 1}) // true
  */
-export declare const isNotEmpty: <T>(value: T) => value is Exclude<T, null | undefined>;
+declare const isNotEmpty: <T>(value: T) => value is Exclude<T, null | undefined>;
 /**
  * Returns 0 if the value is empty, otherwise returns the original value
  * @param value - Value to check
@@ -36,7 +36,7 @@ export declare const isNotEmpty: <T>(value: T) => value is Exclude<T, null | und
  * setZeroIfEmpty("hello") // "hello"
  * setZeroIfEmpty(42) // 42
  */
-export declare const setZeroIfEmpty: <T>(value: T) => T extends null | undefined ? 0 : T | 0;
+declare const setZeroIfEmpty: <T>(value: T) => T extends null | undefined ? 0 : T | 0;
 /**
  * Returns 1 if the value is empty, otherwise returns the original value
  * @param value - Value to check
@@ -48,7 +48,7 @@ export declare const setZeroIfEmpty: <T>(value: T) => T extends null | undefined
  * setOneIfEmpty("hello") // "hello"
  * setOneIfEmpty(42) // 42
  */
-export declare const setOneIfEmpty: <T>(value: T) => T extends null | undefined ? 1 : T | 1;
+declare const setOneIfEmpty: <T>(value: T) => T extends null | undefined ? 1 : T | 1;
 /**
  * Generic function to set a default value if the input is empty
  * @param value - Value to check
@@ -60,7 +60,7 @@ export declare const setOneIfEmpty: <T>(value: T) => T extends null | undefined 
  * setDefaultIfEmpty("", "fallback") // "fallback"
  * setDefaultIfEmpty("hello", "default") // "hello"
  */
-export declare const setDefaultIfEmpty: <T, D>(value: T, defaultValue: D) => T extends null | undefined ? D : T | D;
+declare const setDefaultIfEmpty: <T, D>(value: T, defaultValue: D) => T extends null | undefined ? D : T | D;
 /**
  * Type guard that narrows the type by excluding null and undefined if the value is not empty
  * @param value - Value to check and narrow
@@ -74,5 +74,6 @@ export declare const setDefaultIfEmpty: <T, D>(value: T, defaultValue: D) => T e
  *   }
  * }
  */
-export declare const isNotEmptyGuard: <T>(value: T) => value is NonNullable<T>;
-//# sourceMappingURL=isEmpty.d.ts.map
+declare const isNotEmptyGuard: <T>(value: T) => value is NonNullable<T>;
+
+export { isEmpty, isNotEmpty, isNotEmptyGuard, setDefaultIfEmpty, setOneIfEmpty, setZeroIfEmpty };

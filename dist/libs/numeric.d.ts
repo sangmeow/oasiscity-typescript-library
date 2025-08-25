@@ -22,7 +22,7 @@ interface CharacterExtractionOptions {
  * getNumericCharacters('abc123def456', { maxLength: 3 }) // '123'
  * getNumericCharacters('112233', { removeDuplicates: true }) // '123'
  */
-export declare const getNumericCharacters: (inputString: string, options?: CharacterExtractionOptions) => string;
+declare const getNumericCharacters: (inputString: string, options?: CharacterExtractionOptions) => string;
 /**
  * Extracts alphanumeric characters from a string
  *
@@ -33,6 +33,6 @@ export declare const getNumericCharacters: (inputString: string, options?: Chara
  * @example
  * getAlphanumericCharacters('Hello@123#World!') // 'Hello123World'
  */
-export declare const getAlphanumericCharacters: (inputString: string, options?: CharacterExtractionOptions) => string;
-export {};
-//# sourceMappingURL=numeric.d.ts.map
+declare const getAlphanumericCharacters: (inputString: string, options?: CharacterExtractionOptions) => string;
+
+export { getAlphanumericCharacters, getNumericCharacters };

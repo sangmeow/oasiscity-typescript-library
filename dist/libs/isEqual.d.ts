@@ -15,7 +15,7 @@
  * @since 1.0.0
  * @category Type Guards
  */
-export declare const isString: (value: unknown) => value is string;
+declare const isString: (value: unknown) => value is string;
 /**
  * Checks if a value is a valid number (excluding NaN) and provides type narrowing.
  *
@@ -33,7 +33,7 @@ export declare const isString: (value: unknown) => value is string;
  * @since 1.0.0
  * @category Type Guards
  */
-export declare const isNumber: (value: unknown) => value is number;
+declare const isNumber: (value: unknown) => value is number;
 /**
  * Checks if a value is a valid finite number (excluding NaN and Infinity).
  * More restrictive than `isNumber` as it excludes infinite values.
@@ -52,7 +52,7 @@ export declare const isNumber: (value: unknown) => value is number;
  * @since 1.0.0
  * @category Type Guards
  */
-export declare const isFiniteNumber: (value: unknown) => value is number;
+declare const isFiniteNumber: (value: unknown) => value is number;
 /**
  * Checks if a value is an integer (whole number without decimal places).
  *
@@ -70,7 +70,7 @@ export declare const isFiniteNumber: (value: unknown) => value is number;
  * @since 1.0.0
  * @category Type Guards
  */
-export declare const isInteger: (value: unknown) => value is number;
+declare const isInteger: (value: unknown) => value is number;
 /**
  * Checks if a value is a boolean and provides type narrowing.
  *
@@ -88,7 +88,7 @@ export declare const isInteger: (value: unknown) => value is number;
  * @since 1.0.0
  * @category Type Guards
  */
-export declare const isBoolean: (value: unknown) => value is boolean;
+declare const isBoolean: (value: unknown) => value is boolean;
 /**
  * Checks if a value is exactly `null` and provides type narrowing.
  *
@@ -105,7 +105,7 @@ export declare const isBoolean: (value: unknown) => value is boolean;
  * @since 1.0.0
  * @category Type Guards
  */
-export declare const isNull: (value: unknown) => value is null;
+declare const isNull: (value: unknown) => value is null;
 /**
  * Checks if a value is exactly `undefined` and provides type narrowing.
  *
@@ -122,7 +122,7 @@ export declare const isNull: (value: unknown) => value is null;
  * @since 1.0.0
  * @category Type Guards
  */
-export declare const isUndefined: (value: unknown) => value is undefined;
+declare const isUndefined: (value: unknown) => value is undefined;
 /**
  * Checks if a value is nullish (`null` or `undefined`).
  * Useful for handling optional values and null coalescing scenarios.
@@ -141,7 +141,7 @@ export declare const isUndefined: (value: unknown) => value is undefined;
  * @since 1.0.0
  * @category Type Guards
  */
-export declare const isNullish: (value: unknown) => value is null | undefined;
+declare const isNullish: (value: unknown) => value is null | undefined;
 /**
  * Checks if a value is an array and provides type narrowing.
  * Uses `Array.isArray()` for accurate detection across different contexts.
@@ -160,7 +160,7 @@ export declare const isNullish: (value: unknown) => value is null | undefined;
  * @since 1.0.0
  * @category Type Guards
  */
-export declare const isArray: (value: unknown) => value is unknown[];
+declare const isArray: (value: unknown) => value is unknown[];
 /**
  * Checks if a value is a plain object (created by Object constructor or object literal).
  * Excludes arrays, null, class instances, and other object types like Date, RegExp, etc.
@@ -181,7 +181,7 @@ export declare const isArray: (value: unknown) => value is unknown[];
  * @since 1.0.0
  * @category Type Guards
  */
-export declare const isPlainObject: (value: unknown) => value is Record<string, unknown>;
+declare const isPlainObject: (value: unknown) => value is Record<string, unknown>;
 /**
  * Checks if a value is a function and provides type narrowing.
  *
@@ -199,7 +199,7 @@ export declare const isPlainObject: (value: unknown) => value is Record<string, 
  * @since 1.0.0
  * @category Type Guards
  */
-export declare const isFunction: (value: unknown) => value is (...args: unknown[]) => unknown;
+declare const isFunction: (value: unknown) => value is (...args: unknown[]) => unknown;
 /**
  * Checks if a value is a Date object.
  * Does not validate if the date is valid - use with `isValidDate` for that.
@@ -217,7 +217,7 @@ export declare const isFunction: (value: unknown) => value is (...args: unknown[
  * @since 1.0.0
  * @category Type Guards
  */
-export declare const isDate: (value: unknown) => value is Date;
+declare const isDate: (value: unknown) => value is Date;
 /**
  * Checks if input is a string and equals the target string (strict comparison).
  * Combines type checking with value comparison in a single operation.
@@ -236,7 +236,7 @@ export declare const isDate: (value: unknown) => value is Date;
  * @since 1.0.0
  * @category Equality
  */
-export declare const isEqualString: (input: unknown, target: string) => input is string;
+declare const isEqualString: (input: unknown, target: string) => input is string;
 /**
  * Checks if input is a number and equals the target number (strict comparison).
  * Combines type checking with value comparison in a single operation.
@@ -255,7 +255,7 @@ export declare const isEqualString: (input: unknown, target: string) => input is
  * @since 1.0.0
  * @category Equality
  */
-export declare const isEqualNumber: (input: unknown, target: number) => input is number;
+declare const isEqualNumber: (input: unknown, target: number) => input is number;
 /**
  * Checks if input is a boolean and equals the target boolean (strict comparison).
  * Combines type checking with value comparison in a single operation.
@@ -274,7 +274,7 @@ export declare const isEqualNumber: (input: unknown, target: number) => input is
  * @since 1.0.0
  * @category Equality
  */
-export declare const isEqualBoolean: (input: unknown, target: boolean) => input is boolean;
+declare const isEqualBoolean: (input: unknown, target: boolean) => input is boolean;
 /**
  * Checks if input is NOT a string or does NOT equal the target string.
  * Useful for filtering or validation scenarios.
@@ -293,7 +293,7 @@ export declare const isEqualBoolean: (input: unknown, target: boolean) => input 
  * @since 1.0.0
  * @category Equality
  */
-export declare const isNotEqualString: (input: unknown, target: string) => boolean;
+declare const isNotEqualString: (input: unknown, target: string) => boolean;
 /**
  * Checks if input is NOT a number or does NOT equal the target number.
  * Useful for filtering or validation scenarios.
@@ -312,7 +312,7 @@ export declare const isNotEqualString: (input: unknown, target: string) => boole
  * @since 1.0.0
  * @category Equality
  */
-export declare const isNotEqualNumber: (input: unknown, target: number) => boolean;
+declare const isNotEqualNumber: (input: unknown, target: number) => boolean;
 /**
  * Performs strict equality check with additional empty value validation.
  * Both values must be non-empty (according to isEmpty logic) AND strictly equal.
@@ -332,7 +332,7 @@ export declare const isNotEqualNumber: (input: unknown, target: number) => boole
  * @since 1.0.0
  * @category Equality
  */
-export declare const isEqual: (input: unknown, target: unknown) => boolean;
+declare const isEqual: (input: unknown, target: unknown) => boolean;
 /**
  * Performs loose equality check (==) - use with extreme caution.
  * This function uses JavaScript's loose equality operator which can lead to unexpected results.
@@ -353,7 +353,7 @@ export declare const isEqual: (input: unknown, target: unknown) => boolean;
  * @since 1.0.0
  * @category Equality
  */
-export declare const isLooseEqual: (input: unknown, target: unknown) => boolean;
+declare const isLooseEqual: (input: unknown, target: unknown) => boolean;
 /**
  * Performs deep equality comparison for objects and arrays.
  * Recursively compares nested structures, handling various data types appropriately.
@@ -380,7 +380,7 @@ export declare const isLooseEqual: (input: unknown, target: unknown) => boolean;
  * @since 1.0.0
  * @category Equality
  */
-export declare const isDeepEqual: (input: unknown, target: unknown) => boolean;
+declare const isDeepEqual: (input: unknown, target: unknown) => boolean;
 /**
  * Checks if a value matches any of the provided options.
  * Useful for creating enum-like validations and switch-case alternatives.
@@ -408,7 +408,7 @@ export declare const isDeepEqual: (input: unknown, target: unknown) => boolean;
  * @since 1.0.0
  * @category Utilities
  */
-export declare const isOneOf: <T>(value: unknown, options: readonly T[]) => value is T;
+declare const isOneOf: <T>(value: unknown, options: readonly T[]) => value is T;
 /**
  * Checks if a numeric value is within a specified range (inclusive).
  * Both minimum and maximum values are included in the valid range.
@@ -431,7 +431,7 @@ export declare const isOneOf: <T>(value: unknown, options: readonly T[]) => valu
  * @since 1.0.0
  * @category Utilities
  */
-export declare const isInRange: (value: unknown, min: number, max: number) => value is number;
+declare const isInRange: (value: unknown, min: number, max: number) => value is number;
 /**
  * Checks if a string matches a given pattern (RegExp or string).
  * For string patterns, uses `includes()` method for substring matching.
@@ -452,7 +452,7 @@ export declare const isInRange: (value: unknown, min: number, max: number) => va
  * @since 1.0.0
  * @category Utilities
  */
-export declare const matchesPattern: (value: unknown, pattern: RegExp | string) => value is string;
+declare const matchesPattern: (value: unknown, pattern: RegExp | string) => value is string;
 /**
  * Checks if a value has a specific property and provides type narrowing.
  * Uses the `in` operator for accurate property detection, including inherited properties.
@@ -481,7 +481,7 @@ export declare const matchesPattern: (value: unknown, pattern: RegExp | string) 
  * @since 1.0.0
  * @category Utilities
  */
-export declare const hasProperty: <K extends string | number | symbol>(value: unknown, property: K) => value is Record<K, unknown>;
+declare const hasProperty: <K extends string | number | symbol>(value: unknown, property: K) => value is Record<K, unknown>;
 /**
  * Checks if a value has a specific method (function property).
  * Combines property existence check with function type validation.
@@ -502,7 +502,7 @@ export declare const hasProperty: <K extends string | number | symbol>(value: un
  * @since 1.0.0
  * @category Utilities
  */
-export declare const hasMethod: <K extends string | number | symbol>(value: unknown, methodName: K) => value is Record<K, (...args: unknown[]) => unknown>;
+declare const hasMethod: <K extends string | number | symbol>(value: unknown, methodName: K) => value is Record<K, (...args: unknown[]) => unknown>;
 /**
  * Creates a type guard function that checks if a value is an instance of a specific class.
  * Useful for creating reusable type guards for custom classes.
@@ -529,5 +529,6 @@ export declare const hasMethod: <K extends string | number | symbol>(value: unkn
  * @since 1.0.0
  * @category Utilities
  */
-export declare const createInstanceGuard: <T>(constructor: new (...args: unknown[]) => T) => (value: unknown) => value is T;
-//# sourceMappingURL=isEqual.d.ts.map
+declare const createInstanceGuard: <T>(constructor: new (...args: unknown[]) => T) => (value: unknown) => value is T;
+
+export { createInstanceGuard, hasMethod, hasProperty, isArray, isBoolean, isDate, isDeepEqual, isEqual, isEqualBoolean, isEqualNumber, isEqualString, isFiniteNumber, isFunction, isInRange, isInteger, isLooseEqual, isNotEqualNumber, isNotEqualString, isNull, isNullish, isNumber, isOneOf, isPlainObject, isString, isUndefined, matchesPattern };

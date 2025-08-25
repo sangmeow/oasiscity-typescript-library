@@ -25,5 +25,6 @@
  * // Remove characters from end
  * truncString("Hello", -2) // Returns "Hel"
  */
-export declare const truncString: (str: string, length?: number, padString?: string) => string;
-//# sourceMappingURL=truncString.d.ts.map
+declare const truncString: (str: string, length?: number, padString?: string) => string;
+
+export { truncString };

@@ -13,8 +13,9 @@
  *
  * @since 1.0.0
  */
-export declare const getConcurrentValue: () => string;
-export declare const getConcurrentDateTimeValue: () => string;
-export declare const getConcurrentDateHourValue: () => string;
-export declare const getConcurrentDateValue: () => string;
-//# sourceMappingURL=getConcurrentValue.d.ts.map
+declare const getConcurrentValue: () => string;
+declare const getConcurrentDateTimeValue: () => string;
+declare const getConcurrentDateHourValue: () => string;
+declare const getConcurrentDateValue: () => string;
+
+export { getConcurrentDateHourValue, getConcurrentDateTimeValue, getConcurrentDateValue, getConcurrentValue };

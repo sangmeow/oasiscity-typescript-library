@@ -5,7 +5,7 @@
  * @param outOf - Total number of possible outcomes
  * @returns true if inputs are valid, false otherwise
  */
-export declare const isValidProbabilityInput: (probability: number, outOf: number) => boolean;
+declare const isValidProbabilityInput: (probability: number, outOf: number) => boolean;
 /**
  * Determines if a random event occurs based on probability
  *
@@ -27,5 +27,6 @@ export declare const isValidProbabilityInput: (probability: number, outOf: numbe
  * lottery(-1, 100) // returns false
  * lottery(10, 5) // returns false (probability > outOf)
  */
-export declare const lottery: (probability?: number, outOf?: number) => boolean;
-//# sourceMappingURL=lottery.d.ts.map
+declare const lottery: (probability?: number, outOf?: number) => boolean;
+
+export { isValidProbabilityInput, lottery };
