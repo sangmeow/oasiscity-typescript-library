@@ -31,3 +31,52 @@ export const getConcurrentValue = (): string => {
     // Final format: YYYYMMDDHHMMSS_sss
     return `${dateTimeString}_${milliseconds}`;
 };
+
+export const getConcurrentDateTimeValue = (): string => {
+    const now = new Date();
+    
+    // Extract UTC time components and format them appropriately
+    const year: string = now.getUTCFullYear().toString();
+    const month: string = (now.getUTCMonth() + 1).toString().padStart(2, '0'); // getUTCMonth() returns 0-11, so add 1
+    const day: string = now.getUTCDate().toString().padStart(2, '0');
+    const hours: string = now.getUTCHours().toString().padStart(2, '0');
+    const minutes: string = now.getUTCMinutes().toString().padStart(2, '0');
+    const seconds: string = now.getUTCSeconds().toString().padStart(2, '0');
+    
+    // Generate date/time string in YYYYMMDDHHMMSS format
+    const dateTimeString = `${year}${month}${day}${hours}${minutes}${seconds}`;
+
+    // Final format: YYYYMMDDHHMMSS
+    return `${dateTimeString}`;
+};
+
+export const getConcurrentDateHourValue = (): string => {
+    const now = new Date();
+    
+    // Extract UTC time components and format them appropriately
+    const year: string = now.getUTCFullYear().toString();
+    const month: string = (now.getUTCMonth() + 1).toString().padStart(2, '0'); // getUTCMonth() returns 0-11, so add 1
+    const day: string = now.getUTCDate().toString().padStart(2, '0');
+    const hours: string = now.getUTCHours().toString().padStart(2, '0');
+    
+    // Generate date/time string in YYYYMMDD-HH format
+    const dateTimeString = `${year}${month}${day}_${hours}`;
+
+    // Final format: YYYYMMDD
+    return `${dateTimeString}`;
+};
+
+export const getConcurrentDateValue = (): string => {
+    const now = new Date();
+    
+    // Extract UTC time components and format them appropriately
+    const year: string = now.getUTCFullYear().toString();
+    const month: string = (now.getUTCMonth() + 1).toString().padStart(2, '0'); // getUTCMonth() returns 0-11, so add 1
+    const day: string = now.getUTCDate().toString().padStart(2, '0');
+    
+    // Generate date/time string in YYYYMMDD format
+    const dateTimeString = `${year}${month}${day}`;
+
+    // Final format: YYYYMMDD
+    return `${dateTimeString}`;
+};
